@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Aniversário, Matarazzo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:   #081226;
+    --navy:        #0e2140;
+    --navy-mid:    #163257;
+    --teal:        #2f6e78;
+    --dawn:        #e6a15b;
+    --dawn-bright: #f2c185;
+    --cream:       #f6efe2;
+    --cream-dim:   #cdc3ae;
+    --corinth-blk: #17181a;
+    --corinth-wht: #f2f0eb;
+    --line:        rgba(246,239,226,0.14);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--navy-deep);
+    color:var(--cream);
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+
+  a{ color:inherit; }
+
+  ::selection{ background:var(--dawn); color:var(--navy-deep); }
+
+  /* ---------- top nav ---------- */
+  .topnav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 28px;
+    background:linear-gradient(to bottom, rgba(8,18,38,0.92), rgba(8,18,38,0));
+    backdrop-filter:blur(6px);
+  }
+  .brand{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.05rem;
+    letter-spacing:0.02em;
+    color:var(--cream);
+    display:flex; align-items:center; gap:8px;
+  }
+  .brand svg{ width:20px; height:20px; }
+
+  .navpills{
+    display:flex; gap:4px;
+    background:rgba(246,239,226,0.07);
+    border:1px solid var(--line);
+    padding:5px; border-radius:999px;
+  }
+  .navpills button{
+    font-family:'Inter', sans-serif;
+    font-size:0.8rem;
+    font-weight:500;
+    color:var(--cream-dim);
+    background:transparent;
+    border:none;
+    padding:8px 16px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:background 0.35s ease, color 0.35s ease;
+    white-space:nowrap;
+  }
+  .navpills button.active{
+    background:var(--dawn);
+    color:var(--navy-deep);
+  }
+  .navpills button:hover:not(.active){ color:var(--cream); }
+
+  .navtoggle{
+    display:none;
+    background:rgba(246,239,226,0.08);
+    border:1px solid var(--line);
+    color:var(--cream);
+    border-radius:10px;
+    width:40px; height:40px;
+    align-items:center; justify-content:center;
+    cursor:pointer;
+  }
+
+  @media (max-width:760px){
+    .navpills{
+      position:fixed; top:68px; left:16px; right:16px;
+      flex-direction:column; gap:2px;
+      background:var(--navy);
+      border-radius:16px;
+      padding:8px;
+      display:none;
+      box-shadow:0 20px 40px rgba(0,0,0,0.4);
+    }
+    .navpills.open{ display:flex; }
+    .navpills button{ text-align:left; padding:12px 16px; }
+    .navtoggle{ display:flex; }
+  }
+
+  /* ---------- page container ---------- */
+  .page{
+    display:none;
+    min-height:100vh;
+    padding:0;
+    animation:fadeUp 0.6s ease;
+  }
+  .page.active{ display:block; }
+
+  @keyframes fadeUp{
+    from{ opacity:0; transform:translateY(14px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 28px; }
+
+  section-title-block{ display:block; }
+  .kicker{
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    color:var(--dawn);
+    font-weight:500;
+    margin-bottom:14px;
+    text-transform:lowercase;
+  }
+  .page-heading{
+    font-size:clamp(2.1rem, 5vw, 3.2rem);
+    line-height:1.08;
+    margin-bottom:18px;
+  }
+  .page-sub{
+    color:var(--cream-dim);
+    font-size:1.02rem;
+    max-width:56ch;
+    line-height:1.6;
+    margin-bottom:56px;
+  }
+
+  /* ================= HERO ================= */
+  .hero{
+    position:relative;
+    height:100vh;
+    min-height:640px;
+    display:flex;
+    align-items:flex-end;
+    overflow:hidden;
+    background:linear-gradient(180deg, #081226 0%, #0e2140 38%, #1c3a5e 62%, #7a5a45 82%, #e6a15b 100%);
+  }
+  .hero-sun{
+    position:absolute;
+    left:50%; bottom:-120px;
+    width:340px; height:340px;
+    margin-left:-170px;
+    border-radius:50%;
+    background:radial-gradient(circle at 50% 35%, #ffe3ad 0%, #f2c185 38%, #e6a15b 65%, rgba(230,161,91,0) 72%);
+    opacity:0;
+    animation:sunrise 2.6s ease-out 0.3s forwards;
+    filter:blur(0.5px);
+  }
+  @keyframes sunrise{
+    0%{ opacity:0; transform:translateY(60px); }
+    100%{ opacity:1; transform:translateY(0); }
+  }
+  .hero-stars{
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 12% 18%, #f6efe2 100%, transparent),
+      radial-gradient(1.5px 1.5px at 24% 8%, #f6efe2 100%, transparent),
+      radial-gradient(1px 1px at 38% 22%, #f6efe2 100%, transparent),
+      radial-gradient(1.5px 1.5px at 52% 12%, #f6efe2 100%, transparent),
+      radial-gradient(1px 1px at 67% 6%, #f6efe2 100%, transparent),
+      radial-gradient(1.5px 1.5px at 80% 16%, #f6efe2 100%, transparent),
+      radial-gradient(1px 1px at 91% 9%, #f6efe2 100%, transparent),
+      radial-gradient(1.5px 1.5px at 6% 30%, #f6efe2 100%, transparent),
+      radial-gradient(1px 1px at 45% 4%, #f6efe2 100%, transparent);
+    animation:starsfade 2.6s ease-out 0.3s forwards;
+  }
+  @keyframes starsfade{ to{ opacity:0.25; } }
+
+  .hero-water{
+    position:absolute; left:0; right:0; bottom:0; height:34%;
+    background:linear-gradient(180deg, rgba(11,42,58,0.0), rgba(6,22,32,0.85) 60%, rgba(4,14,22,0.95));
+  }
+
+  .hero-whale{
+    position:absolute;
+    bottom:6%;
+    left:56%;
+    width:min(420px, 46vw);
+    opacity:0;
+    transform:translateY(40px) scale(0.94);
+    animation:whalein 1.8s cubic-bezier(.22,1,.36,1) 1.1s forwards;
+  }
+  @keyframes whalein{
+    to{ opacity:0.92; transform:translateY(0) scale(1); }
+  }
+
+  .hero-plane{
+    position:absolute;
+    top:16%;
+    left:8%;
+    width:64px;
+    opacity:0;
+    animation:planein 2.4s ease-out 1.6s forwards, planefloat 6s ease-in-out 4s infinite;
+  }
+  @keyframes planein{
+    from{ opacity:0; transform:translate(-40px,20px) rotate(-8deg); }
+    to{ opacity:0.85; transform:translate(0,0) rotate(-8deg); }
+  }
+  @keyframes planefloat{
+    0%,100%{ transform:translate(0,0) rotate(-8deg); }
+    50%{ transform:translate(6px,-10px) rotate(-6deg); }
+  }
+
+  .hero-content{
+    position:relative; z-index:5;
+    width:100%;
+    padding:0 28px 9vh;
+  }
+  .hero-inner{ max-width:1080px; margin:0 auto; }
+  .hero-kicker{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:0.82rem; letter-spacing:0.12em;
+    color:var(--cream);
+    background:rgba(8,18,38,0.35);
+    border:1px solid rgba(246,239,226,0.25);
+    padding:7px 16px 7px 12px;
+    border-radius:999px;
+    margin-bottom:26px;
+    backdrop-filter:blur(4px);
+  }
+  .hero-kicker .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--dawn-bright);
+  }
+  .hero-title{
+    font-size:clamp(2.6rem, 7.2vw, 5.4rem);
+    line-height:0.98;
+    color:var(--cream);
+    text-shadow:0 4px 30px rgba(0,0,0,0.35);
+    max-width:14ch;
+  }
+  .hero-title em{
+    font-style:italic;
+    color:var(--dawn-bright);
+  }
+  .hero-latin{
+    margin-top:26px;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.15rem;
+    color:var(--dawn-bright);
+    letter-spacing:0.01em;
+  }
+  .hero-text{
+    margin-top:16px;
+    max-width:48ch;
+    font-size:1.02rem;
+    line-height:1.7;
+    color:rgba(246,239,226,0.86);
+  }
+  .hero-cta{
+    margin-top:40px;
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--dawn);
+    color:var(--navy-deep);
+    font-weight:600;
+    font-size:0.92rem;
+    padding:14px 24px;
+    border-radius:999px;
+    border:none;
+    cursor:pointer;
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow:0 10px 30px rgba(230,161,91,0.25);
+  }
+  .hero-cta:hover{ transform:translateY(-2px); box-shadow:0 14px 36px rgba(230,161,91,0.35); }
+
+  /* ================= SOBRE / CARDS ================= */
+  .about-page{ padding:150px 0 120px; }
+
+  .cardgrid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+    gap:18px;
+  }
+  .icard{
+    background:var(--navy);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:28px 24px;
+    position:relative;
+    overflow:hidden;
+    transition:border-color 0.3s ease, transform 0.3s ease;
+    cursor:default;
+  }
+  .icard:hover{ border-color:rgba(230,161,91,0.45); transform:translateY(-3px); }
+  .icard .icon-wrap{
+    width:46px; height:46px;
+    border-radius:12px;
+    background:rgba(230,161,91,0.12);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:18px;
+  }
+  .icard .icon-wrap svg{ width:24px; height:24px; stroke:var(--dawn-bright); }
+  .icard h3{
+    font-size:1.12rem;
+    margin-bottom:8px;
+    color:var(--cream);
+  }
+  .icard p{
+    font-size:0.9rem;
+    line-height:1.6;
+    color:var(--cream-dim);
+  }
+
+  /* origami interactive card */
+  .icard.origami{ cursor:pointer; }
+  .origami-stage{
+    position:absolute;
+    right:14px; top:14px;
+    width:56px; height:56px;
+  }
+  .origami-stage svg{ width:100%; height:100%; transition:transform 0.6s cubic-bezier(.34,1.56,.64,1); }
+  .icard.origami.folded .origami-stage svg{ transform:rotate(8deg) scale(1.08); }
+  .origami-hint{
+    font-size:0.72rem;
+    color:var(--cream-dim);
+    opacity:0.6;
+    margin-top:14px;
+    font-style:italic;
+  }
+
+  /* corinthians micro badge */
+  .icard.corinthians{
+    background:linear-gradient(135deg, var(--corinth-blk) 0%, #1f2124 100%);
+    border-color:rgba(242,240,235,0.15);
+  }
+  .icard.corinthians .icon-wrap{ background:rgba(242,240,235,0.12); }
+  .icard.corinthians .icon-wrap svg{ stroke:var(--corinth-wht); }
+  .icard.corinthians h3, .icard.corinthians p{ color:var(--corinth-wht); }
+  .icard.corinthians p{ opacity:0.65; }
+
+  /* ================= POEMA ================= */
+  .poema-page{ padding:150px 0 130px; }
+  .poem-card{
+    background:linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 100%);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:clamp(32px, 6vw, 68px);
+    position:relative;
+    max-width:760px;
+    margin:0 auto;
+  }
+  .poem-card .quotemark{
+    font-family:'Fraunces', serif;
+    font-size:4.5rem;
+    line-height:1;
+    color:var(--dawn);
+    opacity:0.5;
+    margin-bottom:-10px;
+  }
+  .poem-text{
+    font-family:'Fraunces', serif;
+    font-weight:400;
+    font-style:italic;
+    font-size:clamp(1.08rem, 2.1vw, 1.32rem);
+    line-height:1.85;
+    color:var(--cream);
+  }
+  .poem-attr{
+    margin-top:36px;
+    display:flex; align-items:center; gap:14px;
+    color:var(--dawn-bright);
+    font-size:0.92rem;
+    letter-spacing:0.02em;
+  }
+  .poem-attr .rule{ width:34px; height:1px; background:var(--dawn-bright); opacity:0.6; }
+
+  /* ================= VERSICULOS ================= */
+  .verses-page{ padding:150px 0 130px; }
+  .verse-list{ display:flex; flex-direction:column; gap:20px; max-width:760px; }
+  .verse-card{
+    border-left:2px solid var(--dawn);
+    padding:6px 0 6px 28px;
+  }
+  .verse-text{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.18rem;
+    line-height:1.7;
+    color:var(--cream);
+    margin-bottom:10px;
+  }
+  .verse-ref{
+    font-size:0.82rem;
+    letter-spacing:0.08em;
+    color:var(--dawn-bright);
+  }
+
+  .song-card{
+    margin-top:44px;
+    max-width:760px;
+    display:flex;
+    gap:22px;
+    align-items:flex-start;
+    background:var(--navy);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:28px;
+  }
+  .song-icon{
+    flex:none;
+    width:46px; height:46px;
+    border-radius:12px;
+    background:rgba(230,161,91,0.12);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--dawn-bright);
+  }
+  .song-info h3{ font-size:1.08rem; margin-bottom:8px; color:var(--cream); }
+  .song-info p{ font-size:0.92rem; line-height:1.6; color:var(--cream-dim); margin-bottom:16px; }
+  .song-link{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:0.85rem; font-weight:600;
+    color:var(--navy-deep);
+    background:var(--dawn);
+    padding:10px 18px;
+    border-radius:999px;
+    text-decoration:none;
+    transition:transform 0.25s ease;
+  }
+  .song-link:hover{ transform:translateY(-2px); }
+
+  @media (max-width:560px){
+    .song-card{ flex-direction:column; }
+  }
+
+  /* ================= MENSAGEM ================= */
+  .msg-page{ padding:150px 0 140px; }
+  .envelope{
+    max-width:620px; margin:0 auto;
+    text-align:center;
+  }
+  .envelope-art{
+    width:120px; height:88px;
+    margin:0 auto 34px;
+    position:relative;
+    cursor:pointer;
+  }
+  .envelope-art svg{ width:100%; height:100%; transition:transform 0.4s ease; }
+  .envelope-art:hover svg{ transform:translateY(-4px); }
+  .envelope-flap{ transform-origin:60px 8px; transition:transform 0.5s ease; }
+  .envelope-art.open .envelope-flap{ transform:rotateX(180deg); }
+
+  .msg-note{
+    margin-top:22px;
+    font-size:0.8rem;
+    color:var(--cream-dim);
+    opacity:0.55;
+    transition:opacity 0.3s ease;
+  }
+
+  .msg-box{
+    margin-top:8px;
+    text-align:left;
+    border-radius:18px;
+    padding:0 6px;
+    max-height:0;
+    opacity:0;
+    overflow:hidden;
+    transition:max-height 0.9s ease, opacity 0.7s ease, padding 0.6s ease, margin 0.6s ease;
+  }
+  .envelope-art.open ~ .msg-box,
+  #envelopeArt.open ~ #msgBox{
+    max-height:4000px;
+    opacity:1;
+    padding:36px 34px;
+    margin-top:26px;
+    background:linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 100%);
+    border:1px solid var(--line);
+  }
+  .msg-box p{
+    font-family:'Fraunces', serif;
+    font-style:normal;
+    font-size:1.02rem;
+    line-height:1.8;
+    color:var(--cream-dim);
+    margin-bottom:20px;
+    text-align:left;
+  }
+  .msg-box p:last-child{ margin-bottom:0; }
+  .msg-date{
+    font-size:0.82rem !important;
+    letter-spacing:0.06em;
+    color:var(--dawn-bright) !important;
+    text-transform:uppercase;
+    font-family:'Inter', sans-serif !important;
+    font-weight:500;
+  }
+  .msg-salutation{
+    font-size:1.15rem !important;
+    color:var(--cream) !important;
+    font-style:italic;
+  }
+  .msg-emphasis{
+    font-size:1.28rem !important;
+    color:var(--dawn-bright) !important;
+    font-style:italic;
+    text-align:center;
+  }
+  .msg-sign{
+    font-style:italic;
+    color:var(--cream) !important;
+    text-align:right;
+  }
+
+  /* ================= FOOTER ================= */
+  .site-footer{
+    text-align:center;
+    padding:50px 28px 60px;
+    color:var(--cream-dim);
+    font-size:0.85rem;
+    opacity:0.55;
+  }
+  .site-footer .fname{ font-family:'Fraunces', serif; font-style:italic; color:var(--dawn-bright); opacity:1; }
+
+  @media (max-width:600px){
+    .about-page,.poema-page,.verses-page,.msg-page{ padding-top:120px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="brand">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 14c4-5 8-6 12-4 3 1.5 5 1 7-1-1 3-3.5 5-6.5 5.2C10 14.4 6 15 2 14Z"/><circle cx="17" cy="9" r="0.6" fill="currentColor"/></svg>
+    Matarazzo
+  </div>
+  <button class="navtoggle" id="navToggle" aria-label="menu">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+  <div class="navpills" id="navPills">
+    <button data-page="inicio" class="active">início</button>
+    <button data-page="sobre">sobre ele</button>
+    <button data-page="poema">poema</button>
+    <button data-page="versiculos">versículos</button>
+    <button data-page="mensagem">mensagem</button>
+  </div>
+</nav>
+
+<!-- ================= HERO / INÍCIO ================= -->
+<div class="page active" id="page-inicio">
+  <section class="hero">
+    <div class="hero-stars"></div>
+    <div class="hero-sun"></div>
+
+    <svg class="hero-plane" viewBox="0 0 64 64" fill="none">
+      <path d="M4 34 L58 20 L46 34 L58 48 L4 34Z" fill="none" stroke="#f6efe2" stroke-width="1.4" stroke-linejoin="round"/>
+      <path d="M22 30 L18 14 L24 18 L28 30" fill="none" stroke="#f6efe2" stroke-width="1.2"/>
+      <path d="M22 38 L16 52 L23 47 L29 38" fill="none" stroke="#f6efe2" stroke-width="1.2"/>
+    </svg>
+
+    <svg class="hero-whale" viewBox="0 0 480 260" fill="none">
+      <path d="M20 190 C60 90 160 40 250 45 C330 49 390 90 430 150 C400 145 370 150 350 165 C330 145 300 138 270 148 C255 130 230 122 205 130 C185 105 150 98 120 112 C95 100 60 120 45 150 C30 160 22 172 20 190Z"
+        fill="#0b2440" stroke="#e6a15b" stroke-width="1.6" stroke-linejoin="round" opacity="0.9"/>
+      <path d="M430 150 C455 140 472 148 478 165 C462 168 445 165 430 150Z" fill="#0b2440" stroke="#e6a15b" stroke-width="1.6"/>
+      <path d="M120 112 C110 90 112 68 128 48" stroke="#e6a15b" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <path d="M128 48 C132 40 142 38 148 44" stroke="#e6a15b" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <circle cx="70" cy="140" r="2.4" fill="#e6a15b"/>
+      <path d="M55 175 C90 185 130 188 165 182" stroke="#e6a15b" stroke-width="1" fill="none" opacity="0.55"/>
+      <path d="M60 195 C100 205 145 208 185 200" stroke="#e6a15b" stroke-width="1" fill="none" opacity="0.4"/>
+    </svg>
+
+    <div class="hero-water"></div>
+
+    <div class="hero-content">
+      <div class="hero-inner">
+        <span class="hero-kicker"><span class="dot"></span> 20 de setembro</span>
+        <h1 class="hero-title">Feliz aniversário,<br><em>Matarazzo</em>.</h1>
+        <p class="hero-latin">hic et nunc — aqui e agora.</p>
+        <p class="hero-text">Todo ano o sol nasce de novo na Paraíba antes de nascer em qualquer outro lugar das Américas. Hoje ele nasce um pouco mais bonito, porque é o seu dia.</p>
+        <button class="hero-cta" onclick="goPage('sobre')">
+          Ver mais
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= SOBRE ELE ================= -->
+<div class="page" id="page-sobre">
+  <div class="about-page wrap">
+    <span class="kicker">quem é ele</span>
+    <h2 class="page-heading">As coisas que fazem<br>você ser você.</h2>
+    <p class="page-sub">Um pequeno mapa do que a gente ama em você — junte tudo isso e dá exatamente no Matarazzo que conhecemos.</p>
+
+    <div class="cardgrid">
+
+      <div class="icard">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 8.6c0-2.5-2-4.3-4.4-4.3-1.7 0-3.2 1-3.9 2.4-.7-1.4-2.2-2.4-3.9-2.4-2.4 0-4.4 1.8-4.4 4.3 0 5 8.3 9.4 8.3 9.4s8.3-4.4 8.3-9.4Z"/><path d="M8.5 11.2c.6.9 1.6 1.5 2.7 1.6M15.4 9.6c0 .9-.3 1.8-.9 2.5"/></svg>
+        </div>
+        <h3>Genuíno</h3>
+        <p>Uma das coisas que mais admiramos em você é a sua sinceridade — o jeito como você escuta de verdade, com o coração puro e autêntico.</p>
+      </div>
+
+      <div class="icard">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13c4-5 9-6 13-4 2.5 1.3 4.5 1 6-1-1 2.7-3 4.5-5.5 4.8C11 13.3 6 14 2 13Z"/><circle cx="15.5" cy="9.3" r="0.5" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <h3>Baleias</h3>
+        <p>As maiores criaturas que existem — e ainda assim as mais quietas, as que cantam baixinho pra quem sabe escutar.</p>
+      </div>
+
+      <div class="icard">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16M7 4l10 3-10 3"/><path d="M4 20h6"/></svg>
+        </div>
+        <h3>Hic et nunc</h3>
+        <p>No braço, em latim: aqui e agora. Um lembrete de viver o momento em vez de correr atrás do amanhã.</p>
+      </div>
+
+      <div class="icard">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L14 9 L21 11 L14 12.5 L12 22 L10 12.5 L3 11 L10 9Z"/></svg>
+        </div>
+        <h3>Farda e céu aberto</h3>
+        <p>Quer ser policial militar e é apaixonado por aviação. Serve e voa — sempre de olho no horizonte.</p>
+      </div>
+
+      <div class="icard">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5C4.7 20 4 19.3 4 18.5V5.5Z"/><path d="M20 5.5C20 4.7 19.3 4 18.5 4H13v16h5.5c.8 0 1.5-.7 1.5-1.5V5.5Z"/></svg>
+        </div>
+        <h3>Livros de coração</h3>
+        <p><em>O Pequeno Príncipe</em> e <em>O Menino, a Toupeira, a Raposa e o Cavalo</em> — histórias simples que dizem as coisas mais importantes da vida.</p>
+      </div>
+
+      <div class="icard origami" id="origamiCard">
+        <div class="origami-stage">
+          <svg viewBox="0 0 56 56" fill="none">
+            <path d="M8 40 L28 12 L48 40 L28 30Z" fill="none" stroke="#e6a15b" stroke-width="1.3" stroke-linejoin="round"/>
+            <path d="M28 12 L28 44" stroke="#e6a15b" stroke-width="1" opacity="0.7"/>
+            <path d="M28 30 L8 40" stroke="#e6a15b" stroke-width="1" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L21 12 L12 21 L3 12Z"/><path d="M12 3v18M3 12h18"/></svg>
+        </div>
+        <h3>Origami</h3>
+        <p>Transforma papel com as mãos. Nas nossas primeiras conversas, dobrou uma garça (ou seria um pato?) — ninguém tem certeza até hoje.</p>
+        <p class="origami-hint">toque para dobrar</p>
+      </div>
+
+      <div class="icard">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+        </div>
+        <h3>Paraíba</h3>
+        <p>Ponta mais oriental das Américas — onde o sol nasce primeiro. É de lá que ele vem.</p>
+      </div>
+
+      <div class="icard">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13a9 5 0 0 1 18 0" /><path d="M2 13h20"/><path d="M6 13v2M18 13v2"/><path d="M11 7 9 13M13 7l2 6"/></svg>
+        </div>
+        <h3>Harry Potter</h3>
+        <p>Hogwarts sempre foi mais do que uma história — é lembrete de que sempre existe um lugar pra pertencer.</p>
+      </div>
+
+      <div class="icard corinthians">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M6 6l12 12M18 6 6 18"/></svg>
+        </div>
+        <h3>Fiel Corinthiano</h3>
+        <p>Na alegria e na aflição do futebol brasileiro, o coração é preto e branco.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ================= POEMA ================= -->
+<div class="page" id="page-poema">
+  <div class="poema-page wrap">
+    <span class="kicker">um poema para você</span>
+    <h2 class="page-heading">Amigos que são casa.</h2>
+    <p class="page-sub">Tem gente que é isso mesmo: casa. E você é uma dessas pessoas para muita gente.</p>
+
+    <div class="poem-card">
+      <div class="quotemark">&ldquo;</div>
+      <p class="poem-text">Há amigos que são casa, não pelas paredes que constroem, mas pela segurança que oferecem quando o mundo pesa. São aqueles que não perguntam &ldquo;está tudo bem?&rdquo; só para ouvir a resposta, mas para ficar mesmo quando a resposta é confusa.
+      <br><br>
+      Há amigos que são casa, porque não exigem versões melhoradas de nós, aceitam o caos, a dúvida, o dia em que não temos nada para oferecer. Com eles não precisamos de fechar portas internas, nem arrumar emoções à pressa.
+      <br><br>
+      Basta só ser. São refúgios e espelho. Lembram-nos quem somos quando nos perdemos e quem podemos ser quando nos esquecemos. Não salvam, acompanham. Não consertam, sustentam.
+      <br><br>
+      E, talvez, seja isso que seja casa: um lugar onde não precisamos de fugir de nós mesmos, porque alguém decidiu ficar.</p>
+      <div class="poem-attr"><span class="rule"></span> André Nobre Duarte</div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= VERSICULOS ================= -->
+<div class="page" id="page-versiculos">
+  <div class="verses-page wrap">
+    <span class="kicker">palavras para guardar</span>
+    <h2 class="page-heading">Amizade tem até<br>versículo.</h2>
+    <p class="page-sub">Porque algumas amizades são bênção mesmo, e a Bíblia já falava disso muito antes da gente.</p>
+
+    <div class="verse-list">
+      <div class="verse-card">
+        <p class="verse-text">&ldquo;Em todo tempo ama o amigo, e na angústia nasce o irmão.&rdquo;</p>
+        <p class="verse-ref">Provérbios 17:17</p>
+      </div>
+      <div class="verse-card">
+        <p class="verse-text">&ldquo;Assim como os perfumes alegram a vida, a amizade sincera dá ânimo para viver.&rdquo;</p>
+        <p class="verse-ref">Provérbios 27:9</p>
+      </div>
+    </div>
+
+    <div class="song-card">
+      <div class="song-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      </div>
+      <div class="song-info">
+        <h3>Uma música pra ouvir</h3>
+        <p>Tem uma canção sobre amizade que combina com tudo isso — sobre ser amigo até o fim, na paz e na dor. Aperta o play.</p>
+        <a class="song-link" href="https://www.youtube.com/watch?v=aAWLZmgTaGg" target="_blank" rel="noopener">
+          Ouvir no YouTube
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= MENSAGEM ================= -->
+<div class="page" id="page-mensagem">
+  <div class="msg-page wrap">
+    <span class="kicker">só para você</span>
+    <h2 class="page-heading">Uma mensagem especial.</h2>
+    <p class="page-sub">Guardei essa página só pra isso.</p>
+
+    <div class="envelope">
+      <div class="envelope-art" id="envelopeArt" onclick="toggleEnvelope()">
+        <svg viewBox="0 0 120 88" fill="none">
+          <rect x="2" y="10" width="116" height="76" rx="6" fill="#163257" stroke="#e6a15b" stroke-width="1.4"/>
+          <path d="M4 14 L60 54 L116 14" stroke="#e6a15b" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="envelope-flap" d="M2 12 L60 50 L118 12 L118 10 Q118 8 116 8 L4 8 Q2 8 2 10 Z" fill="#0e2140" stroke="#e6a15b" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <p class="msg-note" id="msgTeaser">toque no envelope para ler</p>
+
+      <div class="msg-box" id="msgBox">
+        <p class="msg-date">20 de setembro de 2026, dois dias para a primavera.</p>
+
+        <p class="msg-salutation">Querido amigo,</p>
+
+        <p>Lembro-me de que, quando nos encontramos, por propósito divino, você estava vivenciando um inverno que parecia sem fim e cheio de incertezas. Minha primeira reação foi te acolher, oferecer meu ombro amigo e te dar todo o suporte de que você precisasse para seguir em frente. Lembro-me também de me compadecer da sua situação e de me comprometer a estar ao seu lado para atravessar esse inverno e celebrar a vida quando a primavera chegasse.</p>
+
+        <p>Pois bem, estamos aqui, em 20 de setembro, uma data tão simbólica por muitos motivos. Um deles é que ela marca o início de um novo ciclo. É um novo ano que reinicia uma contagem de dias para te lembrar que cada dia importa, que cada passo é fundamental para seguir e crescer, e que cada degrau, subido um de cada vez, te levará a lugares inimagináveis.</p>
+
+        <p>O outro motivo é que estamos a apenas dois dias da primavera. Sim, ela sempre chega. Como diz Cecília Meireles: <em>&ldquo;A primavera chegará, mesmo que ninguém mais saiba seu nome, nem acredite no calendário, nem possua jardim para recebê-la.&rdquo;</em> Que seu coração e sua mente estejam abertos para receber as flores, as cores, os aromas e os sabores, o calor do sol e a alegria que só essa estação pode trazer. É um novo tempo!</p>
+
+        <p class="msg-emphasis">Feliz vida, Matarazzo!</p>
+
+        <p>Minha oração é para que Deus continue sendo teu sustento e tua fortaleza. Que teus sonhos e desejos mais íntimos sejam realizados, para que você experimente o melhor que Deus tem preparado para sua vida. Que seus caminhos sejam repletos de luz — muita luz — para afastar qualquer pessoa ou situação que tente te fazer retornar à caverna. E eu estarei aqui, seja no inverno, na primavera, no verão ou no outono, para te aplaudir, te impulsionar, te celebrar e orar por você, sempre.</p>
+
+        <p class="msg-emphasis">Parabéns!</p>
+
+        <p class="msg-sign">De um amigo que te ama muito.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  feito com carinho para o <span class="fname">Matarazzo</span> — 20.09
+</footer>
+
+<script>
+  const pages = document.querySelectorAll('.page');
+  const navBtns = document.querySelectorAll('.navpills button');
+  const navPills = document.getElementById('navPills');
+  const navToggle = document.getElementById('navToggle');
+
+  function goPage(name){
+    pages.forEach(p => p.classList.toggle('active', p.id === 'page-' + name));
+    navBtns.forEach(b => b.classList.toggle('active', b.dataset.page === name));
+    window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
+    navPills.classList.remove('open');
+  }
+
+  navBtns.forEach(b => b.addEventListener('click', () => goPage(b.dataset.page)));
+  navToggle.addEventListener('click', () => navPills.classList.toggle('open'));
+
+  const origamiCard = document.getElementById('origamiCard');
+  origamiCard.addEventListener('click', () => origamiCard.classList.toggle('folded'));
+
+  function toggleEnvelope(){
+    const art = document.getElementById('envelopeArt');
+    const teaser = document.getElementById('msgTeaser');
+    art.classList.toggle('open');
+    teaser.textContent = art.classList.contains('open') ? 'toque no envelope para fechar' : 'toque no envelope para ler';
+  }
+</script>
+
+</body>
+</html>
